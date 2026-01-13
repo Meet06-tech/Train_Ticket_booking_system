@@ -24,6 +24,9 @@ dependencies {
 
     //jackson libraries
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.6'
+
+    //bcrypt library
+    implementation 'org.mindrot:jbcrypt:0.4'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

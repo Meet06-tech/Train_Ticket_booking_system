@@ -3,13 +3,60 @@
  */
 package org.ticket.booking;
 
+import org.ticket.booking.entities.User;
+import org.ticket.booking.services.UserBookingService;
+import org.ticket.booking.util.UserServiceUtil;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
 
     public static void main(String[] args)
     {
-        System.out.println(new App().getGreeting());
+        System.out.println("Welcome to Ticket Booking App");
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your choice");
+        int choice = 0;
+
+        UserBookingService userBookingService;
+        try{
+            userBookingService = new UserBookingService();
+        }catch(IOException ex){
+            System.out.println("Something went Wrong");
+            return;
+        }
+
+        while(choice!=7){
+            System.out.println("Please enter your choice");
+            System.out.println("1. Sign UP");
+            System.out.println("2. Sign IN");
+            System.out.println("3. Fetch Booking Details");
+            System.out.println("4. Search Train");
+            System.out.println("5. Book a Seat");
+            System.out.println("6. Cancel Booking");
+            System.out.println("7. Exit the Application");
+            choice = sc.nextInt();
+
+            switch (choice){
+                case 1:
+                    System.out.println("Enter your username to Signup :");
+                    String usernameToSignUp = sc.next();
+                    System.out.println("Enter your password to Signup :");
+                    String passwordToSignUp = sc.next();
+                    User userToSignup = new User(usernameToSignUp,passwordToSignUp, UserServiceUtil.hashPassword(passwordToSignUp),new ArrayList<>(), UUID.randomUUID().toString());
+                    userBookingService.signUp(userToSignup);
+                    break;
+
+                case 2:
+
+            }
+        }
+
+
     }
 }
